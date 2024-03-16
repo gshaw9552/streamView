@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{% static 'styles/signupPage.css' %}">
+    <title>Sign Up</title>
+    <style>
+        
+    </style>
+</head>
+<body>
+    <div class="main-block">
+        <div class="signup-block">
+            <div class="header">
+                <p class="title">Sign Up</p>
+                <p class="tagline">It's Easy and Rapid</p>
+            </div>
+
+            {% for message in messages%}
+            <h5 style="color:red">{{message}}</h5>
+            {% endfor %}
+            
+            <div class="user-data">
+                <form method="POST" action="">
+                    {% csrf_token %}
+                    <input type="text" name="username" placeholder="Username">
+                    <input type="email" name="email" placeholder="Email Address">
+                    <input type="password" name="password" placeholder="Enter Password">
+                    <input type="password" name="password2" placeholder="Enter Password Again">
+                    <p>By clicking Sign Up , you agree to our <span class="notice">Terms, Privacy Policy</span> and <span class="notice">Cookies Policy.</span></p>
+                    <input type="submit" class="signup-btn" name="Sign Up" value="Sign Up">
+                    <p>Already have an account? <a href="{% url 'login' %}">Log In</a></p>
+                </form>
+            </div>
+        </div>
+    </div>    
+</body>
+</html>

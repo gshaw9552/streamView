@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link 
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" 
+        rel="stylesheet" 
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" 
+        crossorigin="anonymous"
+    >
+    <style>
+
+        body {
+            background-color: lightcyan;
+            padding: 10px;
+        }
+
+        .main-container {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 40vh;
+        }
+        .main {
+            
+            padding: 20px;
+            background-color: lightgrey;
+            box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.25);
+        }
+
+        .login {
+            display: flex;
+            justify-content: end;
+        }
+
+        .welcome {
+            margin-bottom: 30px;
+        }
+
+        .welcome h1 {
+            font-size: 50px;
+            color: rgb(59, 22, 97);
+        }
+
+        .description p {
+            color: rgb(37, 82, 82);
+        }
+
+
+    </style>
+</head>
+<body>
+    
+    <header class="header">       
+        <div class="login">
+            {% if user.is_authenticated %}
+            <a class="btn btn-primary" href="logout" role="button">Log Out</a>
+            {% else %}
+            <a class="btn btn-primary" href="login" role="button">Log In</a>
+            {% endif %}
+        </div>
+    </header>
+    <div class="main-container">
+        <div class="main">
+            <div class="welcome">
+                {% if user.is_authenticated %}
+                <h1>Welcome {{user.username}}</h1>
+                {% else %}
+                <h1>Welcome Anonymous</h1>
+                {% endif %}
+            </div>
+            
+            <div class="description">
+                <p>
+                    This website is created primarily for the purpose of using a youtube clone
+                </p>
+                {% if user.is_authenticated == False %}
+                <p>
+                    Kindly <strong>login</strong> to access the youtube homepage
+                </p>
+                {% else %}
+                <a class="btn btn-primary" href="youtube" role="button">Youtube Home Page</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</body>
+</html>

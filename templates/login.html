@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{% static 'styles/loginPage.css' %}">
+    <title>Log In</title>
+</head>
+<body>
+    <div class="main-block">
+        <div class="signup-block">
+            <div class="header">
+                <p class="title">Log In</p>
+                <p class="tagline">It's Easy and Rapid</p>
+            </div>
+            
+            {% for message in messages %}
+            <h5 style="color: red;">{{message}}</h5>
+            {% endfor %}
+
+            <div class="user-data">
+                <form method="POST">
+                    {% csrf_token %}
+                    <input type="text" name="username" placeholder="Username">
+                    <input type="password" name="password" placeholder="Enter Password">
+                    <input type="submit" class="login-btn" value="Log In">
+                    <a href="#" class="forgot-pass">Forgotten Password?</a>
+                    <div class="create-account">
+                        <a href="{% url 'signup' %}">Create New Account</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>    
+</body>
+</html>

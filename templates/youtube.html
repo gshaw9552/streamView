@@ -1,0 +1,353 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="{% static 'styles/general.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/header.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/sidebar.css' %}">
+    <link rel="stylesheet" href="{% static 'styles/video.css' %}">
+    <title>YouTube Clone</title>
+    <link 
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" 
+        rel="stylesheet" 
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" 
+        crossorigin="anonymous"
+    >
+  </head>
+  <body>
+    <!-- header -->
+    <header class="header">
+        <div class="left-section">
+            <img src="{% static 'images/icons/hamburger-menu.svg' %}" class="hamburger-menu">
+            <img src="{% static 'images/icons/youtube-logo.svg' %}" class="youtube-logo">
+        </div>
+        <form method="POST">
+          <div class="middle-section">
+            {% csrf_token %}
+            <input type="text" name="search" class="search-bar" placeholder="Search">
+            <button type="submit" class="search-button">
+                <img src="{% static 'images/icons/search.svg' %}" class="search-icon">
+                <div class="tooltip">Search</div>
+            </button>
+            <button class="voice-search-button">
+                <img src="{% static 'images/icons/voice-search-icon.svg' %}" class="voice-search-icon">
+                <div class="tooltip">Search with your voice</div>
+            </button>
+          </div>
+        </form>
+        <div class="right-section">
+            <div class="upload-icon-container">
+              <img src="{% static 'images/icons/upload.svg' %}" class="upload-icon">
+              <div class="tooltip">Create</div>  
+            </div>
+            <div class="youtube-apps-icon-container">
+              <img src="{% static 'images/icons/youtube-apps.svg' %}" class="youtube-apps-icon">
+              <div class="tooltip">YouTube Apps</div>
+            </div>
+            <div class="notifications-icon-container">
+              <img src="{% static 'images/icons/notifications.svg' %}" class="notifications-icon">
+              <div class="notifications-count">3</div>
+              <div class="tooltip">Notifications</div>
+            </div>
+            <a href="/" style ="
+              background-color: #007bff; 
+              color: #fff; 
+              text-decoration: none; 
+              display: inline-block; 
+              padding: .2rem .2rem; 
+              font-size: 1rem; 
+              line-height: 1.5; 
+              border-radius: .25rem;
+            ">Home Page</a>
+        </div>
+    </header>
+
+    <nav class="sidebar">
+      <div class="sidebar-link">
+        <img src="{% static 'images/icons/home.svg' %}">
+        <div>Home</div>
+      </div>
+      <div class="sidebar-link">
+        <img src="{% static 'images/icons/explore.svg' %}">
+        <div>Explore</div>
+      </div>
+      <div class="sidebar-link">
+        <img src="{% static 'images/icons/subscriptions.svg' %}">
+        <div>Subscriptions</div>
+      </div>
+      <div class="sidebar-link">
+        <img src="{% static 'images/icons/originals.svg' %}">
+        <div>Originals</div>
+      </div>
+      <div class="sidebar-link">
+        <img src="{% static 'images/icons/youtube-music.svg' %}">
+        <div>YouTube Music</div>
+      </div>
+      <div class="sidebar-link">
+        <img src="{% static 'images/icons/library.svg' %}">
+        <div>Library</div>
+      </div>
+    </nav>
+
+    <main>
+      <section class="video-grid">
+        {% for video in videos %}
+        <div class="video-preview">
+          <a href="{{ video.url }}">
+          <div class="thumbnail-row">
+            <img src="{{ video.thumbnail }}" class="thumbnail">
+            <div class="video-time">{{ video.duration }}</div>
+          </div>
+        </a>
+          <div class=video-info-grid>
+            <div class="channel-picture">
+              <img class="profile-picture" src="">
+            </div>
+            <div class="video-info">
+              <p class="video-title">
+                {{ video.title }}
+              </p>
+              <p class="video-author">{{ video.channelName }}</p>
+              <p class="video-stats">3.4M views &#183; {{ video.uploadTime }}</p>
+            </div>    
+          </div>
+        </div>
+        {% endfor %}
+    
+        <div class="video-preview">
+          <div class="thumbnail-row">
+            <img src="{% static 'images/thumbnails/thumbnail-1.webp' %}" class="thumbnail">
+            <div class="video-time">8:22</div>
+          </div>
+          <div class=video-info-grid>
+            <div class="channel-picture">
+              <img class="profile-picture" src="{% static 'images/channel-pictures/channel-1.jpeg' %}">
+            </div>
+            <div class="video-info">
+              <p class="video-title">
+                Try Not to Laugh Challenge #9
+              </p>
+              <p class="video-author">Markiplier</p>
+              <p class="video-stats">19M views &#183; 4 years ago</p>
+            </div>        
+          </div>
+        </div>
+
+        <div class="video-preview">
+          <div class="thumbnail-row">
+            <img src="{% static 'images/thumbnails/thumbnail-2.webp' %}" class="thumbnail">
+            <div class="video-time">8:22</div>
+          </div>
+          <div class=video-info-grid>
+            <div class="channel-picture">
+              <img class="profile-picture" src="{% static 'images/channel-pictures/channel-2.jpeg' %}">
+            </div>
+            <div class="video-info">
+              <p class="video-title">
+                Try Not to Laugh Challenge #9
+              </p>
+              <p class="video-author">Markiplier</p>
+              <p class="video-stats">19M views &#183; 4 years ago</p>
+            </div>        
+          </div>
+        </div>
+    
+        <div class="video-preview">
+          <div class="thumbnail-row">
+            <img src="{% static 'images/thumbnails/thumbnail-3.webp' %}" class="thumbnail">
+            <div class="video-time">9:13</div>
+          </div>
+          <div class=video-info-grid>
+            <div class="channel-picture">
+              <img class="profile-picture" src="{% static 'images/channel-pictures/channel-3.jpeg' %}">
+            </div>
+            <div class="video-info">
+              <p class="video-title">
+                Crazy Tik Toks Taken Moments Before DISASTER
+              </p>
+              <p class="video-author">SSSniperWolf</p>
+              <p class="video-stats">12M views &#183; 1 year ago</p>
+            </div>
+          </div>
+        </div>
+    
+        <div class="video-preview">
+          <div class="thumbnail-row">
+            <img src="{% static 'images/thumbnails/thumbnail-4.webp' %}" class="thumbnail">
+            <div class="video-time">22:09</div>
+          </div>
+          <div class=video-info-grid>
+            <div class="channel-picture">
+              <img class="profile-picture" src="{% static 'images/channel-pictures/channel-4.jpeg' %}">
+            </div>
+            <div class="video-info">
+              <p class="video-title">
+                The Simplest Math Problem No One Can Solve - Collatz Conjecture
+              </p>
+              <p class="video-author">Veritasium</p>
+              <p class="video-stats">18M views &#183; 4 months ago</p>
+            </div>
+          </div>
+        </div>
+    
+        <div class="video-preview">
+          <div class="thumbnail-row">
+            <img src="{% static 'images/thumbnails/thumbnail-5.webp' %}" class="thumbnail">
+            <div class="video-time">11:17</div>
+          </div>
+          <div class=video-info-grid>
+            <div class="channel-picture">
+              <img class="profile-picture" src="{% static 'images/channel-pictures/channel-5.jpeg' %}">
+            </div>
+            <div class="video-info">
+              <p class="video-title">
+                Kadane's Algorithm to Maximum Sum Subarray Problem
+              </p>
+              <p class="video-author">CS Dojo</p>
+              <p class="video-stats">519K views &#183; 5 years ago</p>
+            </div>
+          </div>
+        </div>
+    
+        <div class="video-preview">
+          <div class="thumbnail-row">
+            <img src="{% static 'images/thumbnails/thumbnail-6.webp' %}" class="thumbnail">
+            <div class="video-time">19:59</div>
+          </div>
+          <div class=video-info-grid>
+            <div class="channel-picture">
+              <img class="profile-picture" src="{% static 'images/channel-pictures/channel-6.jpeg' %}">
+            </div>
+            <div class="video-info">
+              <p class="video-title">
+                Anything Yuo Can Fit In The Circle I'll Pay For
+              </p>
+              <p class="video-author">MrBeast</p>
+              <p class="video-stats">141M views &#183; 1 year ago</p>
+            </div>
+          </div>
+        </div>
+    
+        <div class="video-preview">
+          <div class="thumbnail-row">
+            <img src="{% static 'images/thumbnails/thumbnail-7.webp' %}" class="thumbnail">
+            <div class="video-time">10:13</div>
+          </div>
+          <div class=video-info-grid>
+            <div class="channel-picture">
+              <img class="profile-picture" src="{% static 'images/channel-pictures/channel-7.jpeg' %}">
+            </div>
+            <div class="video-info">
+              <p class="video-title">
+                Why Planes Don't Fly Over Tibet
+              </p>
+              <p class="video-author">RealLifeLore</p>
+              <p class="video-stats">6.6M views &#183; 1 year ago</p>
+            </div>
+          </div>
+        </div>
+    
+        <div class="video-preview">
+          <div class="thumbnail-row">
+            <img src="{% static 'images/thumbnails/thumbnail-8.webp' %}" class="thumbnail">
+            <div class="video-time">7:12</div>
+          </div>
+          <div class=video-info-grid>
+            <div class="channel-picture">
+              <img class="profile-picture" src="{% static 'images/channel-pictures/channel-8.jpeg' %}">
+            </div>
+            <div class="video-info">
+              <p class="video-title">
+                Inside The World's Biggest Passenger Plane
+              </p>
+              <p class="video-author">Veritasium</p>
+              <p class="video-stats">3.7M views &#183; 10 months ago</p>
+            </div>
+          </div>
+        </div>
+    
+        <div class="video-preview">
+          <div class="thumbnail-row">
+            <img src="{% static 'images/thumbnails/thumbnail-9.webp' %}" class="thumbnail">
+            <div class="video-time">13:17</div>
+          </div>
+          <div class=video-info-grid>
+            <div class="channel-picture">
+              <img class="profile-picture" src="{% static 'images/channel-pictures/channel-9.jpeg' %}">
+            </div>
+            <div class="video-info">
+              <p class="video-title">
+                The SECRET to Super Human STRENGTH
+              </p>
+              <p class="video-author">ThenX</p>
+              <p class="video-stats">18M views &#183; 3 years ago</p>
+            </div>
+          </div>
+        </div>
+    
+        <div class="video-preview">
+          <div class="thumbnail-row">
+            <img src="{% static 'images/thumbnails/thumbnail-10.webp' %}" class="thumbnail">
+            <div class="video-time">7:53</div>
+          </div>
+          <div class=video-info-grid>
+            <div class="channel-picture">
+              <img class="profile-picture" src="{% static 'images/channel-pictures/channel-10.jpeg' %}">
+            </div>
+            <div class="video-info">
+              <p class="video-title">
+                How The World's Largest Cruise Ship Makes 30,000 Meals Every Day
+              </p>
+              <p class="video-author">Business Insider</p>
+              <p class="video-stats">14M views &#183; 1 year ago</p>
+            </div>
+          </div>
+        </div>
+    
+        <div class="video-preview">
+          <div class="thumbnail-row">
+            <img src="{% static 'images/thumbnails/thumbnail-11.webp' %}" class="thumbnail">
+            <div class="video-time">4:10</div>
+          </div>
+          <div class=video-info-grid>
+            <div class="channel-picture">
+              <img class="profile-picture" src="{% static 'images/channel-pictures/channel-11.jpeg' %}">
+            </div>
+            <div class="video-info">
+              <p class="video-title">
+                Dubai's Crazy Underwater Train and Other Things #Only in Dubai
+              </p>
+              <p class="video-author">Destination Tips</p>
+              <p class="video-stats">3M views &#183; 1 year ago</p>
+            </div>
+          </div>
+        </div>
+    
+        <div class="video-preview">
+          <div class="thumbnail-row">
+            <img src="{% static 'images/thumbnails/thumbnail-12.webp' %}" class="thumbnail">
+            <div class="video-time">4:51</div>
+          </div>
+          <div class=video-info-grid>
+            <div class="channel-picture">
+              <img class="profile-picture" src="{% static 'images/channel-pictures/channel-12.jpeg' %}">
+            </div>
+            <div class="video-info">
+              <p class="video-title">
+                What would happen if you didn’t drink water? - Mia Nacamulli
+              </p>
+              <p class="video-author">TED-Ed</p>
+              <p class="video-stats">12M views &#183; 5 years ago</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>
